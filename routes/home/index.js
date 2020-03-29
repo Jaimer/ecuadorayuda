@@ -24,7 +24,8 @@ router.get('/', (req, res)=>{
         req.app.locals.layout = 'home';
         res.locals.metaTags = {
             title: `Solicita y Entrega Ayuda`,
-            description: `Listado de casos activos`
+            description: `Listado de casos activos`,
+            url: `https://ecuadorayuda.org`
         };
         res.locals.user = req.user? JSON.parse(JSON.stringify(req.user)) : false;
         res.render('home/index', {cases: cases, path: `/casos`});
@@ -52,7 +53,9 @@ router.get('/casos/pagina/:pagina', (req, res)=>{
     .then(cases => {
         req.app.locals.layout = 'home';
         res.locals.metaTags = {
-            title: `Solicita y Entrega Ayuda`
+            title: `Solicita y Entrega Ayuda`,
+            description: `Listado de casos activos`,
+            url: `https://ecuadorayuda.org/casos/pagina/${req.params.pagina}`
         };
         res.locals.user = req.user? JSON.parse(JSON.stringify(req.user)) : false;
         res.render('home/index', {cases: cases, path: `/casos`});
@@ -62,7 +65,8 @@ router.get('/casos/pagina/:pagina', (req, res)=>{
 router.get('/ayudame', (req,res) => {
     res.locals.metaTags = {
         title: `Solicita Ayuda`,
-        description: `Listado de casos activos`
+        description: `Registra tu caso`,
+        url: `https://ecuadorayuda.org/ayudame`
     };
     res.render('home/request', {pagetitle: "Solicita Ayuda"});
 });
@@ -140,7 +144,8 @@ router.get('/filtro/provincia/:provincia/ciudad/:ciudad/categoria/:categoria/pag
         req.app.locals.layout = 'home';
         res.locals.metaTags = {
             title: `Solicita y Entrega Ayuda`,
-            description: `Listado de casos activos`
+            description: `Listado de casos activos`,
+            url: `https://ecuadorayuda.org/filtro/provincia/${req.params.provincia}/ciudad/${req.params.ciudad}/categoria/${req.params.categoria}`
         };
         res.locals.user = req.user? JSON.parse(JSON.stringify(req.user)) : false;
         res.render('home/index', {cases: cases, path: `/filtro/provincia/${req.params.provincia}/ciudad/${req.params.ciudad}/categoria/${req.params.categoria}`});
@@ -152,7 +157,8 @@ router.get('/caso/:id', (req,res) => {
         Case.find({category: caso.category}).lean().limit(4).then(related => {
             res.locals.metaTags = {
                 title: `${caso.name} necesita ayuda con ${caso.category} en ${caso.city}`,
-                description: `${caso.name} necesita ayuda con ${caso.category} en ${caso.city}`
+                description: `${caso.name} necesita ayuda con ${caso.category} en ${caso.city}`,
+                url: `https://ecuadorayuda.org/caso/${caso._id}`
             };
             res.render('home/single', {caso: caso, related: related, pagetitle: `${caso.name} necesita ayuda con ${caso.category} en ${caso.city}`});
         })
