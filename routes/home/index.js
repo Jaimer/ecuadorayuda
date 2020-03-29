@@ -5,6 +5,7 @@ const Case = require('../../models/Case');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const request = require('request');
+const rss = require('rss-generator');
 const LocalStrategy = require('passport-local').Strategy;
 const latinize = require('latinize');
 
@@ -22,7 +23,8 @@ router.get('/', (req, res)=>{
     Case.paginate({}, options).then(cases => {
         req.app.locals.layout = 'home';
         res.locals.metaTags = {
-            title: `Solicita y Entrega Ayuda`
+            title: `Solicita y Entrega Ayuda`,
+            description: `Listado de casos activos`
         };
         res.locals.user = req.user? JSON.parse(JSON.stringify(req.user)) : false;
         res.render('home/index', {cases: cases, path: `/casos`});
@@ -59,7 +61,8 @@ router.get('/casos/pagina/:pagina', (req, res)=>{
 
 router.get('/ayudame', (req,res) => {
     res.locals.metaTags = {
-        title: `Solicita Ayuda`
+        title: `Solicita Ayuda`,
+        description: `Listado de casos activos`
     };
     res.render('home/request', {pagetitle: "Solicita Ayuda"});
 });
@@ -136,7 +139,8 @@ router.get('/filtro/provincia/:provincia/ciudad/:ciudad/categoria/:categoria/pag
     Case.paginate(query, options).then(cases => {
         req.app.locals.layout = 'home';
         res.locals.metaTags = {
-            title: `Solicita y Entrega Ayuda`
+            title: `Solicita y Entrega Ayuda`,
+            description: `Listado de casos activos`
         };
         res.locals.user = req.user? JSON.parse(JSON.stringify(req.user)) : false;
         res.render('home/index', {cases: cases, path: `/filtro/provincia/${req.params.provincia}/ciudad/${req.params.ciudad}/categoria/${req.params.categoria}`});
@@ -147,12 +151,39 @@ router.get('/caso/:id', (req,res) => {
     Case.findById({"_id": req.params.id}).lean().then(caso => {
         Case.find({category: caso.category}).lean().limit(4).then(related => {
             res.locals.metaTags = {
-                title: `${caso.name} necesita ayuda con ${caso.category} en ${caso.city}`
+                title: `${caso.name} necesita ayuda con ${caso.category} en ${caso.city}`,
+                description: `${caso.name} necesita ayuda con ${caso.category} en ${caso.city}`
             };
             res.render('home/single', {caso: caso, related: related, pagetitle: `${caso.name} necesita ayuda con ${caso.category} en ${caso.city}`});
         })
     })
 });
+
+router.get('/rss', (req,res)=>{
+    Case.find({}).lean().then(casos => {
+        let feed = new rss({
+            title: 'Casos Activos Ecuador Ayuda',
+            description: 'Casos de Ecuador Ayuda',
+            feed_url: 'https://ecuadorayuda.org/rss',
+            image_url: 'https://ecuadorayuda.org/img/hands-min.png',
+            site_url: 'https://ecuadorayuda.org',
+            ttl: '60'
+        })
+
+        casos.forEach(caso => {
+            feed.item({
+                title: `${caso.name} necesita ayuda con ${caso.category} en ${caso.city}`,
+                description: caso.description,
+                url: `https://ecuadorayuda.org/caso/${caso._id}`,
+                category: caso.category,
+                author: `${caso.name} ${caso.lastname}`,
+                date: caso.created
+            })
+        });
+
+        res.send(feed.xml());
+    })
+})
 
 router.get('/login', (req, res)=>{
     res.render('home/login', {pagetitle:"Iniciar Sesión"});
