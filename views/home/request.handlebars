@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="card card-login mx-auto mt-5">
+    <div class="card-header">Solicitar Ayuda</div>
+
+    <div class="card-body">
+        <form action="/ayudame" id="form" method="post">
+            {{#if error}}
+                <div class="alert alert-danger">
+                    {{error}}
+                </div>
+            {{/if}}
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input name="nombre" class="form-control" id="nombre" type="text" placeholder="Escribe tu nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido</label>
+                <input name="apellido" class="form-control" id="apellido" type="text" placeholder="Escribe tu apellido" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input name="telefono" class="form-control" id="telefono" type="tel" placeholder="Escribe tu telefono" required>
+            </div>
+            <div class="form-group">
+                <label for="provincia">Provincia</label>
+                <select name="provincia" class="form-control" id="provincia">
+                    <option value="" selected="true">Selecciona tu Provincia</option>
+                    <option value="Azuay" stateid="2">Azuay</option>
+                    <option value="Bolivar" stateid="3">Bolivar</option>
+                    <option value="Canar" stateid="4">Canar</option>
+                    <option value="Carchi" stateid="5">Carchi</option>
+                    <option value="Chimborazo" stateid="6">Chimborazo</option>
+                    <option value="Cotopaxi" stateid="7">Cotopaxi</option>
+                    <option value="El Oro" stateid="8">El Oro</option>
+                    <option value="Esmeraldas" stateid="9">Esmeraldas</option>
+                    <option value="Galapagos" stateid="1">Galapagos</option>
+                    <option value="Guayas" stateid="10">Guayas</option>
+                    <option value="Imbabura" stateid="11">Imbabura</option>
+                    <option value="Loja" stateid="12">Loja</option>
+                    <option value="Los Rios" stateid="13">Los Rios</option>
+                    <option value="Manabi" stateid="14">Manabi</option>
+                    <option value="Morona-Santiago" stateid="15">Morona-Santiago</option>
+                    <option value="Napo" stateid="23">Napo</option>
+                    <option value="Orellana" stateid="24">Orellana</option>
+                    <option value="Pastaza" stateid="17">Pastaza</option>
+                    <option value="Pichincha" stateid="18">Pichincha</option>
+                    <option value="Santa Elena" stateid="25">Santa Elena</option>
+                    <option value="Santo Domingo de los Tsachilas" stateid="26">Santo Domingo de los Tsachilas</option>
+                    <option value="Sucumbios" stateid="22">Sucumbios</option>
+                    <option value="Tungurahua" stateid="19">Tungurahua</option>
+                    <option value="Zamora-Chinchipe" stateid="20">Zamora-Chinchipe</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ciudad">Ciudad</label>
+                <select name="ciudad" class="ciudades form-control" id="ciudad">
+                    <option value="">Selecciona tu Ciudad</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input name="email" class="form-control" id="email" type="email" placeholder="Escribe tu email">
+            </div>
+            <div class="form-group">
+                <label for="categoria">Elige una Categoria</label>
+                <select name="categoria" class="form-control" id="categoria" required>
+                    <option value="">Selecciona una categoría</option>
+                    <option value="insumos medicos">Oxígeno, Medicinas u otros Insumos</option>
+                    <option value="atencion medica">Atención Médica</option>
+                    <option value="persona fallecida">Persona Fallecida</option>
+                    <option value="alimentacion">Alimentación</option>
+                    <option value="hospedaje">Hospedaje</option>
+                    <option value="otros problemas">Otros Problemas</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Que necesitas?</label>
+                <textarea name="descripcion" class="form-control" id="descripcion" placeholder="Detalla lo que necesitas" required rows="10"></textarea>
+            </div>
+            <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+            <button type="submit" class="btn btn-primary btn-block">Enviar Información</button>
+        </form>
+    </div>
+</div>
+    </div>
+    <div class="col-md-3"></div>
+</div>

@@ -1,0 +1,46 @@
+<div id="left-sidebar" class="sidebar">
+  <div class="navbar-brand">
+      <a href="/admin"><img src="/assets/images/icon.svg" alt="Oculux Logo" class="img-fluid logo"><span>Bienes Area</span></a>
+      <button type="button" class="btn-toggle-offcanvas btn btn-sm float-right"><i class="lnr lnr-menu icon-close"></i></button>
+  </div>
+  <div class="sidebar-scroll">
+      <div class="user-account">
+          <div class="user_div">
+              <img src="/assets/images/user.png" class="user-photo" alt="User Profile Picture">
+          </div>
+          <div class="dropdown">
+              <span>Hola,</span>
+              <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{#if curuser}}{{curuser.firstName}}{{/if}}</strong></a>
+              <ul class="dropdown-menu dropdown-menu-right account vivify flipInY">
+                  <li><a href="page-profile.html"><i class="icon-user"></i>My Profile</a></li>
+                  <li><a href="app-inbox.html"><i class="icon-envelope-open"></i>Messages</a></li>
+                  <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
+                  <li class="divider"></li>
+                  <li><a href="page-login.html"><i class="icon-power"></i>Logout</a></li>
+              </ul>
+          </div>                
+      </div>  
+      <nav id="left-sidebar-nav" class="sidebar-nav">
+          <ul id="main-menu" class="metismenu">
+              <li class="header">Menu</li>
+              <li class="active open">
+                  <a href="/admin" class="has-arrow"><i class="icon-home"></i><span>Propiedades</span></a>
+                  <ul>
+                      <li {{#if (compare curpath "/admin/properties")}}class="active"{{/if}}>
+                        <a href="/admin/properties">Todas las Propiedades</a>
+                      </li>
+                      <li {{#if (compare curpath "/admin/properties/cities")}}class="active"{{/if}}>
+                        <a href="/admin/properties/cities">Ciudades</a>
+                      </li>
+                      <li {{#if (compare curpath "/admin/properties/hoods")}}class="active"{{/if}}>
+                        <a href="/admin/properties/hoods">Sectores</a>
+                      </li>
+                      <li {{#if (compare curpath "/admin/properties/types")}}class="active"{{/if}}>
+                        <a href="/admin/properties/types">Tipos Inmueble</a>
+                      </li>
+                  </ul>
+              </li>
+          </ul>
+      </nav>     
+  </div>
+</div>

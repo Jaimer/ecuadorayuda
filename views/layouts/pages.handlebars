@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+{{>home/head}}
+<body>
+	<!-- Page top section -->
+	<section class="page-top-section set-bg" data-setbg="/img/hands.png">
+		<div class="overlay">
+			<div class="container pagetitle text-white">
+				<h2>{{pagetitle}}</h2>
+			</div>
+		</div>
+	</section>
+	<!--  Page top end -->
+
+	<!-- page -->
+	<section class="page-section">
+		<div class="container">
+			{{#if errors}}
+				{{#each errors}}
+				<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+					</button>
+					{{message}}
+				</div>
+				{{/each}}
+			{{/if}}
+			{{>home/form-msgs}}
+
+			{{{body}}}
+		</div>
+	</section>
+	<!-- page end -->
+
+	{{>home/footer}}
+                                        
+	<!--====== Javascripts & Jquery ======-->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/statecity.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/masonry.pkgd.min.js"></script>
+	<script src="/js/magnific-popup.min.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="https://www.google.com/recaptcha/api.js?render=6Le-4uQUAAAAALhMe8fRF5u818EHn5a_HbGqNImH"></script>
+	<script>
+	grecaptcha.ready(function() {
+		$('#form').submit(ev => {
+			if($('#g-recaptcha-response').val() != ""){
+				return true;
+			}else{
+				ev.preventDefault();
+			grecaptcha.execute('6Le-4uQUAAAAALhMe8fRF5u818EHn5a_HbGqNImH', {action: 'request'})
+			.then(function(token) {
+				document.getElementById('g-recaptcha-response').value = token
+				$('#form').submit();
+			});
+			}
+		})
+	});
+	</script>
+</body>
+</html>

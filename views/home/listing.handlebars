@@ -1,0 +1,73 @@
+<!-- Filter form section -->
+<section class="page-section">
+	<div class="container">
+        <div class="filter-search" id="buscar">
+            <div class="container">
+                <form class="filter-form" action="/propiedades/buscar" method="POST">
+                    <input name="nombre" type="text" placeholder="Nombre">
+                    <select name="ciudad">
+                        <option value="todas">Todas las Ciudades</option>
+                        {{#each cities}}
+                        <option value="{{_id}}">{{name}} - {{state}}</option>
+                        {{/each}}
+                    </select>
+                    <select name="tipo">
+                        <option value="todas">Todos las Categorías</option>
+                        {{#each types}}
+                        <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                    <button class="site-btn fs-submit">BUSCAR</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Filter form section end -->
+<section class="page-section categories-page">
+<div class="container">
+    <div class="row">
+        {{#each properties.docs}}
+        <div class="col-lg-4 col-md-6">
+            <!-- feature -->
+            <div class="feature-item">
+                <div class="feature-pic set-bg" data-setbg="/uploads/props/{{image}}">
+                    <div class="sale-notic">{{operation}}</div>
+                </div>
+                <div class="feature-text">
+                    <div class="text-center feature-title">
+                        <h5><a href="/propiedades/{{hood.city.slug}}/{{hood.slug}}/{{slug}}">{{title}}</a></h5>
+                        <p><i class="fa fa-map-marker"></i> {{hood.name}} - {{hood.city.name}}</p>
+                    </div>
+                    <div class="room-info-warp">
+                        <div class="room-info">
+                            <div class="rf-left">
+                                <p><i class="fa fa-square-o"></i><strong>Area:</strong> {{area}} m<sup>2</sup></p>
+                                <p><i class="fa fa-arrows-h"></i><strong>Frente:</strong> {{front}} m</p>
+                            </div>
+                            <div class="rf-right">
+                                <p><i class="fa fa-suitcase"></i><strong>Finalidad:</strong> {{btype}}</p>
+                                <p><i class="fa fa-arrows-v"></i><strong>Fondo:</strong> {{depth}} m</p>
+                            </div>	
+                        </div>
+                        <div class="room-info">
+                            <div class="rf-left">
+                                <p><i class="fa fa-barcode"></i> {{code}}</p>
+                            </div>
+                            <div class="rf-right">
+                                <p><i class="fa fa-clock-o"></i> {{generateDate created 'MMMM D YYYY'}}</p>
+                            </div>	
+                        </div>
+                    </div>
+                    <a href="/propiedades/{{hood.city.slug}}/{{hood.slug}}/{{slug}}" class="room-price">$ {{price}}</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="site-pagination">
+        {{#pagination path properties.page properties.prevPage properties.nextPage properties.totalPages properties.hasPrevPage properties.hasNextPage}}
+        {{/pagination}}
+    </div>
+</div>
+</section>

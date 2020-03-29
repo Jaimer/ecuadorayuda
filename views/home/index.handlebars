@@ -1,0 +1,114 @@
+<!-- Hero section -->
+	<section class="hero-section set-bg" data-setbg="/img/hands.png">
+		<div class="container hero-text text-white">
+			<a href="/ayudame" class="site-btn"><i class="fa fa-ambulance"></i> Solicita Ayuda Aquí</a>
+			<a href="#buscar" class="site-btn"><i class="fa fa-handshake-o"></i> Ayuda a Alguien</a>
+		</div>
+	</section>
+	<!-- Hero section end -->
+
+	<!-- Filter form section -->
+	<div class="filter-search" id="buscar">
+		<div class="container">
+			<form class="filter-form" action="/buscar" method="POST">
+				<select name="provincia" class="form-control" id="provincia">
+                    <option value="todas" selected="true">Todas las Provincias</option>
+                    <option value="Azuay" stateid="2">Azuay</option>
+                    <option value="Bolivar" stateid="3">Bolivar</option>
+                    <option value="Canar" stateid="4">Canar</option>
+                    <option value="Carchi" stateid="5">Carchi</option>
+                    <option value="Chimborazo" stateid="6">Chimborazo</option>
+                    <option value="Cotopaxi" stateid="7">Cotopaxi</option>
+                    <option value="El Oro" stateid="8">El Oro</option>
+                    <option value="Esmeraldas" stateid="9">Esmeraldas</option>
+                    <option value="Galapagos" stateid="1">Galapagos</option>
+                    <option value="Guayas" stateid="10">Guayas</option>
+                    <option value="Imbabura" stateid="11">Imbabura</option>
+                    <option value="Loja" stateid="12">Loja</option>
+                    <option value="Los Rios" stateid="13">Los Rios</option>
+                    <option value="Manabi" stateid="14">Manabi</option>
+                    <option value="Morona-Santiago" stateid="15">Morona-Santiago</option>
+                    <option value="Napo" stateid="23">Napo</option>
+                    <option value="Orellana" stateid="24">Orellana</option>
+                    <option value="Pastaza" stateid="17">Pastaza</option>
+                    <option value="Pichincha" stateid="18">Pichincha</option>
+                    <option value="Santa Elena" stateid="25">Santa Elena</option>
+                    <option value="Santo Domingo de los Tsachilas" stateid="26">Santo Domingo de los Tsachilas</option>
+                    <option value="Sucumbios" stateid="22">Sucumbios</option>
+                    <option value="Tungurahua" stateid="19">Tungurahua</option>
+                    <option value="Zamora-Chinchipe" stateid="20">Zamora-Chinchipe</option>
+                </select>
+				<select name="ciudad" class="ciudades form-control" id="ciudad">
+                    <option value="todas">Todas las Ciudades</option>
+                </select>
+				<select name="categoria" class="form-control" id="categoria" required>
+                    <option value="todas">Todas las Categorías</option>
+                    <option value="insumos medicos">Oxígeno, Medicinas u otros Insumos</option>
+                    <option value="atencion medica">Atención Médica</option>
+                    <option value="persona fallecida">Persona Fallecida</option>
+                    <option value="alimentacion">Alimentación</option>
+                    <option value="hospedaje">Hospedaje</option>
+                    <option value="otros problemas">Otros Problemas</option>
+                </select>
+				<button class="site-btn fs-submit">FILTRAR</button>
+			</form>
+		</div>
+	</div>
+	<!-- Filter form section end -->
+
+
+	<!-- feature section -->
+	<section class="feature-section spad">
+		<div class="container">
+			<div class="section-title text-center">
+				<h3>{{cases.totalDocs}} Solicitudes de Ayuda Activas</h3>
+			</div>
+			<div class="row">
+				{{#each cases.docs}}
+				<div class="col-lg-4 col-md-6">
+					<!-- feature -->
+					<div class="feature-item">
+						<div class="feature-text">
+							<div class="text-center feature-title">
+								<h5><a href="/caso/{{_id}}">{{name}} necesita ayuda con {{category}}</a></h5>
+								<p><i class="fa fa-map-marker"></i> {{state}} - {{city}}</p>
+							</div>
+							<div class="room-info-warp">
+								<div class="room-info">
+									<div class="rf-left">
+										{{#if (compare "insumos medicos" category)}}
+										<p><i class="fa fa-medkit fa-2x"></i></p>
+										{{/if}}
+										{{#if (compare "atencion medica" category)}}
+										<p><i class="fa fa-user-md fa-2x"></i></p>
+										{{/if}}
+										{{#if (compare "persona fallecida" category)}}
+										<p><i class="fa fa-heart fa-2x"></i></p>
+										{{/if}}
+										{{#if (compare "alimentacion" category)}}
+										<p><i class="fa fa-cutlery fa-2x"></i></p>
+										{{/if}}
+										{{#if (compare "hospedaje" category)}}
+										<p><i class="fa fa-bed fa-2x"></i></p>
+										{{/if}}
+										{{#if (compare "otros problemas" category)}}
+										<p><i class="fa fa-gavel fa-2x"></i></p>
+										{{/if}}
+									</div>
+									<div class="rf-right">
+										<p><i class="fa fa-clock-o fa-2x"></i> {{generateDate created 'DD/MM/YYYY'}}</p>
+									</div>	
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{{/each}}
+			</div>
+		</div>
+	</section>
+	<!-- feature section end -->
+	<div class="site-pagination">
+        {{#pagination path cases.page cases.prevPage cases.nextPage cases.totalPages cases.hasPrevPage cases.hasNextPage}}
+        {{/pagination}}
+    </div>

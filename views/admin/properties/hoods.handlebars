@@ -1,0 +1,98 @@
+<div class="block-header">
+    <div class="row clearfix">
+        <div class="col-md-6 col-sm-12">
+            <h1>Sectores</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/admin">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Sectores</li>
+                </ol>
+            </nav>
+        </div>            
+        <div class="col-md-6 col-sm-12 text-right hidden-xs">
+            
+        </div>
+    </div>
+</div>
+{{#each errors}}
+    <div class="alert alert-danger" role="alert">
+        <strong>{{message}}</strong>
+    </div>                
+{{/each}}
+<div class="row clearfix">
+    <div class="col-lg-4 col-md-4">
+        <div class="card">
+            <div class="body">
+                <div class="header">
+                <h2>Crear Sector</h2>
+                </div>
+            </div>
+            <div class="body">
+                <form action="/admin/properties/hoods/create" method="post">
+                    <div class="form-group">
+                        <label for="title">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Ciudad</label>
+                        <select name="city" id="city" class="custom-select">
+                            {{#each cities}}
+                            <option value="{{_id}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear Sector</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 col-md-8">
+        <div class="card">
+            <div class="body">
+                <div class="header">
+                    <h2>Listado de Ciudades</h2>
+                    <ul class="header-dropdown dropdown">    
+                        <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:void(0);">Action</a></li>
+                                <li><a href="javascript:void(0);">Another Action</a></li>
+                                <li><a href="javascript:void(0);">Something else</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover dataTable js-exportable">
+                            <thead>
+                                <tr>
+                                    <th>Sector</th>
+                                    <th>Ciudad</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Sector</th>
+                                    <th>Ciudad</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {{#each hoods}}
+                                <tr>
+                                    <td scope="row">{{name}}</td>
+                                    <td>{{city.name}}</td>
+                                    <td><form action="/admin/properties/cities/delete/{{_id}}?_method=DELETE" method="POST"><button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Borrar</button></form></td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,259 @@
+<div class="block-header">
+    <div class="row clearfix">
+        <div class="col-md-6 col-sm-12">
+            <h1>Editar Propiedad</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/admin">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="/admin/properties">Propiedades</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Editar Propiedad</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    </div>
+
+    <div class="row clearfix">
+    <div class="col-lg-12 col-md-12">
+        <div class="card">
+            <div class="body">
+                <form action="/admin/properties/edit/{{property._id}}?_method=PUT" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="col">
+                        {{#each errors}}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{message}}</strong>
+                            </div>                
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="title">Título</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Ingresa el título" value="{{property.title}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="title">Código</label>
+                                <input type="text" class="form-control" id="code" name="code" placeholder="Ingresa el código" value="{{property.code}}">
+                            </div>
+                    </div>
+                    <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="status">Tipo de Inmueble</label>
+                                <select name="type" id="type" class="custom-select">
+                                    {{#select property.type}}
+                                    {{#each types}}
+                                    <option value="{{_id}}"><i class="fa fa-fw fa-{{icon}}"></i>{{name}}</option>
+                                    {{/each}}
+                                    {{/select}}
+                                </select>
+                            </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="status">Finalidad</label>
+                            <select name="btype" id="btype" class="custom-select">
+                                {{#select property.btype}}
+                                <option value="Industrial">Industrial</option>
+                                <option value="Comercial">Comercial</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                                <label for="status">Status</label>
+                                <select name="status" id="status" class="custom-select">
+                                    {{#select property.status}}
+                                    <option value="public">Publico</option>
+                                    <option value="private">Privado</option>
+                                    <option value="draft">Borrador</option>
+                                    {{/select}}
+                                </select>
+                            </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="status">Operación</label>
+                                <select name="operation" id="operation" class="custom-select">
+                                    {{#select property.operation}}
+                                    <option value="En Venta">En Venta</option>
+                                    <option value="En Alquiler">En Alquiler</option>
+                                    {{/select}}
+                                </select>
+                            </div>
+                    </div>
+                    <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="title">Precio</label>
+                                <input type="text" class="form-control" id="price" name="price" value="{{property.price}}">
+                            </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="title">Ubicación (Mapa)</label>
+                            <input type="text" class="form-control" id="location" name="location" value="{{property.location}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="hood">Provincia - Ciudad - Sector</label>
+                            <select name="hood" id="hood" class="selectpicker" data-live-search="true">
+                                {{#select property.hood}}
+                                {{#each hoods}}
+                                <option value="{{_id}}">{{city.state}} - {{city.name}} - {{name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-sm-4">            
+                        <div class="form-group">
+                                <label for="title">Área Total</label>
+                                <input type="text" class="form-control" id="area" name="area" value="{{property.area}}">
+                            </div> 
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="title">Frente</label>
+                            <input type="text" class="form-control" id="front" name="front" value="{{property.front}}">
+                        </div>
+                    </div>
+                    <div class="col">            
+                            <div class="form-group">
+                                <label for="title">Fondo</label>
+                                <input type="text" class="form-control" id="depth" name="depth" value="{{property.depth}}">
+                            </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-sm-6">
+                        <div class="form-row">
+                            <label for="">Características</label>
+                        </div>
+                        <div class="form-row">
+                            <div class="col" id="features" name="features">
+                                {{#each property.features}}
+                                <div class="form-row" id="ftrow{{@index}}">
+                                    <div class="form-group col-5">
+                                        <input type="text" class="form-control" name="ftlbl" placeholder="Titulo" value="{{@key}}">
+                                    </div>
+                                    <div class="col-1 form-group text-center">
+                                        =
+                                    </div>
+                                    <div class="col-5 form-group">
+                                        <input type="text" class="form-control" name="fttxt" placeholder="Valor" value="{{this}}">
+                                    </div>
+                                    <div class="col-1 form-group">
+                                        <button type="button" class="btn btn-danger" onclick="deleterow({{@index}})">X</button>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <button type="button" class="btn btn-primary" id="addfeat" onclick="addfeatrow()" data-count="1">Añadir</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <textarea class="form-control" id="description" rows="3" name="description" >{{property.description}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="preview">
+                                Imagen Destacada
+                            </label>
+                        </div>
+                        <div class="row" id="featured">
+                            <div class="col-12">
+                                <img src="/uploads/props/{{property.image}}" height="120px">
+                                <i class="fa fa-delete dltbtn"></i>
+                                <input type="hidden" name="featuredimage" value="{{property.image}}">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Subir Imagen</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="uploadfeatured" id="uploadfeatured" accept="image/*" data-max-size="1048576‬">
+                                <label class="custom-file-label" for="inputGroupFile01">Sube una foto max 1 MB</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="preview">
+                                Galería de Propiedad
+                            </label>
+                        </div>
+                        <div class="row" id="gallery">
+                            {{#each property.gallery}}
+                            <div class="col-2" id="imggal{{@index}}"><img id="{{this}}" src="/uploads/props/{{this}}" height="80px">
+                            <button type="button" class="btn btn-danger dltbtn" onclick="deleteImage('{{@index}}')"><i class="fa fa-times"></i></button>
+                            <input type="hidden" name="imageurl" id="imageurl{{@index}}" value="{{this}}"></div>
+                            {{/each}}
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Subir Imagen</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="image" id="image" accept="image/*" data-max-size="1048576‬">
+                                <label class="custom-file-label" for="inputGroupFile01">Sube una foto max 1 MB</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h2>Información Interna</h2>
+                <div class="form-row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="address">Dirección Exacta</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Ingresa la dirección" value="{{property.address}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="owner">Nombre de Contacto</label>
+                            <input type="text" class="form-control" id="owner" name="owner" placeholder="Ingresa el nombre del contacto" value="{{property.owner}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="contact">Teléfono de Contacto</label>
+                            <input type="text" class="form-control" id="contact" name="contact" placeholder="Ingresa el teléfono de contacto" value="{{property.contact}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-4"></div>
+                    <div class="col-4"><button type="submit" class="btn btn-primary" id="submit">Guardar Cambios</button></div>
+                    &nbsp;&nbsp;
+                    <a href="/admin/properties"><button type="button" class="btn btn-danger">Cancelar</button></a></div>
+                    <div class="col-4"></div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

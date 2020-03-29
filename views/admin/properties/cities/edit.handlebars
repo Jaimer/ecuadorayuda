@@ -1,0 +1,59 @@
+<div class="block-header">
+    <div class="row clearfix">
+        <div class="col-md-6 col-sm-12">
+            <h1>Editar Ciudad</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/admin">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Editar Ciudad</li>
+                </ol>
+            </nav>
+        </div>            
+        <div class="col-md-6 col-sm-12 text-right hidden-xs">
+            
+        </div>
+    </div>
+</div>
+{{#each errors}}
+    <div class="alert alert-danger" role="alert">
+        <strong>{{message}}</strong>
+    </div>                
+{{/each}}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12">
+        <div class="card">
+            <div class="body">
+                <form action="/admin/properties/cities/edit/{{city._id}}?_method=PUT" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="title">Ciudad</label>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Ingresa la ciudad" value="{{city.name}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Provincia</label>
+                        <input type="text" class="form-control" id="state" name="state" placeholder="Ingresa la provincia" value="{{city.state}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">País</label>
+                        <input type="text" class="form-control" id="country" name="country" placeholder="Ingresa el país" value="{{city.country}}">
+                    </div>
+                    <div class="form-group">
+                        <label>Foto</label>
+                        <img src="/uploads/cities/{{city.image}}" alt="" srcset="" style="width: 100%;">
+                    </div>
+                    <div class="input-group mb-3">
+                            <label for="image">Cambiar foto</label>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Foto</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="image" id="" accept="image/*" data-max-size="1048576‬">
+                                <label class="custom-file-label" for="inputGroupFile01">Sube una foto max 1 MB</label>
+                            </div>
+                        </div>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <a href="/admin/properties/cities"><button type="button" class="btn btn-danger">Cancelar</button></a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

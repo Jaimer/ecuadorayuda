@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>ALL POSTS</h1>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Date</th>
+                        <th>Imagen</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Category</th>
+                        <th>Allow Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each posts}}
+                    <tr>
+                        <td scope="row">{{id}}</td>
+                        <td>{{generateDate date 'MMMM D YYYY'}}</td>
+                        <td><img src="/uploads/{{file}}" alt="{{file}}" height="50px"></td>
+                        <td><a href="/post/{{slug}}">{{title}}</a></td>
+                        <td>{{status}}</td>
+                        <td>{{category.name}}</td>
+                        <td>{{allowComments}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

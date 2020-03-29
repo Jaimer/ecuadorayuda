@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-lg-8 single-list-page">
+        <div class="single-list-content">
+            <div class="row">
+                <div class="col-xl-12 sl-title">
+                    <h2>{{caso.name}} necesita ayuda con {{caso.category}}</h2>
+                    <p><i class="fa fa-map-marker"></i>{{caso.state}} - {{caso.city}}</p>
+                </div>
+            </div>
+            <h3 class="sl-sp-title">Datos de Contacto</h3>
+            <div class="row property-details-list">
+                <div class="col-sm-6">
+                    <p><i class="fa fa-check-circle-o"></i> Teléfono: {{caso.phone}}</p>
+                </div>
+                <div class="col-sm-6">
+                    <p><i class="fa fa-check-circle-o"></i> Email: {{caso.mail}}</p>
+                </div>
+            </div>
+            <h3 class="sl-sp-title">Detalle de lo Solicitado</h3>
+            <div class="description">
+                <p>{{caso.description}}</p>
+            </div>
+        </div>
+    </div>
+    <!-- sidebar -->
+    <div class="col-lg-4 col-md-7 sidebar">
+        <div class="related-properties">
+            <h2>Casos Similares</h2>
+            {{#each related}}
+            <div class="feature-item">
+						<div class="feature-text">
+							<div class="text-center feature-title">
+								<h5><a href="/caso/{{_id}}">{{name}} necesita ayuda con {{category}}</a></h5>
+								<p><i class="fa fa-map-marker"></i> {{state}} - {{city}}</p>
+							</div>
+							<div class="room-info-warp">
+								<div class="room-info">
+									<div class="rf-left">
+										{{#if (compare "insumos medicos" category)}}
+										<p><i class="fa fa-medkit fa-2x"></i></p>
+										{{/if}}
+										{{#if (compare "atencion medica" category)}}
+										<p><i class="fa fa-user-md fa-2x"></i></p>
+										{{/if}}
+										{{#if (compare "persona fallecida" category)}}
+										<p><i class="fa fa-heart fa-2x"></i></p>
+										{{/if}}
+										{{#if (compare "alimentacion" category)}}
+										<p><i class="fa fa-cutlery fa-2x"></i></p>
+										{{/if}}
+										{{#if (compare "hospedaje" category)}}
+										<p><i class="fa fa-bed fa-2x"></i></p>
+										{{/if}}
+										{{#if (compare "otros problemas" category)}}
+										<p><i class="fa fa-gavel fa-2x"></i></p>
+										{{/if}}
+									</div>
+									<div class="rf-right">
+										<p><i class="fa fa-clock-o fa-2x"></i> {{generateDate created 'DD/MM/YYYY'}}</p>
+									</div>	
+								</div>
+							</div>
+						</div>
+					</div>
+            {{/each}}
+        </div>
+    </div>
+</div>
