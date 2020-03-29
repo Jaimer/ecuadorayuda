@@ -35,7 +35,7 @@ router.all('/*', (req, res, next) => {
     next();
 });
 
-router.get('/casos/:pagina', (req, res)=>{
+router.get('/casos/pagina/:pagina', (req, res)=>{
     const options = {
         page: req.params.pagina,
         limit: 24,
