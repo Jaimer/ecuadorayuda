@@ -99,7 +99,7 @@ router.post('/ayudame', (req,res) => {
         
             newCase.save().then(savedCase => {
                 req.flash('success_message', `Su caso se ha registrado exitosamente` );
-                res.redirect('/ayudame');
+                res.redirect(`/caso/${savedCase.id}`);
             }).catch(validator => {
                 res.render('home/request', {errors: validator.errors, pagetitle: "Solicita Ayuda"});
             });
